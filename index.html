@@ -22,12 +22,16 @@
 
         /* Header & Navigation */
         .main-header { background: var(--main); padding: 12px 0; position: sticky; top: 0; z-index: 1000; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
-        .nav-wrapper { display: flex; justify-content: space-between; align-items: center; }
+        .nav-wrapper { display: flex; justify-content: space-between; align-items: center; position: relative; }
         .logo-area { color: white; display: flex; flex-direction: column; align-items: center; font-weight: 900; text-transform: uppercase; }
+        
         .nav-links { display: flex; list-style: none; gap: 20px; align-items: center; }
         .nav-links a { color: white; text-decoration: none; font-weight: 700; transition: 0.3s; }
         .nav-links a:hover { color: var(--navy); }
         
+        /* Mobile Menu Toggle */
+        .menu-toggle { display: none; color: white; font-size: 1.5rem; cursor: pointer; }
+
         .dropdown { position: relative; }
         .dropdown-menu {
             display: none;
@@ -67,7 +71,7 @@
 
         /* Hero Section */
         .hero {
-            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('tow1.0.JPG');
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('tow1.0.jpg');
             height: 75vh;
             background-size: cover;
             background-position: center;
@@ -153,11 +157,38 @@
 
         footer { padding: 40px 0; text-align: center; background: #1a324d; color: white; }
 
+        /* RESPONSIVE FIXES */
         @media (max-width: 768px) {
-            .nav-links { display: none; }
+            .menu-toggle { display: block; }
+
+            .nav-links {
+                display: none; /* Hidden by default on mobile */
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: var(--main);
+                padding: 20px;
+                gap: 15px;
+                box-shadow: 0 10px 10px rgba(0,0,0,0.1);
+            }
+
+            .nav-links.active { display: flex; } /* Toggle class for visibility */
+
+            .dropdown-menu {
+                position: static;
+                width: 100%;
+                background: rgba(255,255,255,0.1);
+                box-shadow: none;
+            }
+            .dropdown-menu a { color: white !important; }
+
             .about-grid { grid-template-columns: 1fr; text-align: center; }
             .about-features { justify-content: center; }
             .coverage-grid { grid-template-columns: repeat(2, 1fr); }
+            
+            .call-now-btn { font-size: 0.8rem; padding: 8px 12px; }
         }
     </style>
 </head>
@@ -169,7 +200,12 @@
                 <i class="fas fa-truck-moving"></i>
                 <span>Multipurpose</span>
             </div>
-            <ul class="nav-links">
+
+            <div class="menu-toggle" onclick="toggleMobileMenu()">
+                <i class="fas fa-bars"></i>
+            </div>
+
+            <ul class="nav-links" id="navLinks">
                 <li><a href="#home" id="nav-home">Home</a></li>
                 <li><a href="#about" id="nav-about">About Us</a></li>
                 <li><a href="#coverage" id="nav-cov">Area Coverage</a></li>
@@ -207,7 +243,7 @@
                     <img src="tow2.0.JPG" alt="Towing Truck" class="about-img-main">
                 </div>
                 <div class="about-content" data-aos="fade-left">
-                    <span style="color: var(--main); font-weight: 900; letter-spacing: 2px;">WHO WE ARE</span>
+                    <span id="who-we-are" style="color: var(--main); font-weight: 900; letter-spacing: 2px;">WHO WE ARE</span>
                     <h2 id="ab-t">Your Multipurpose Transport Partner</h2>
                     <p id="ab-d">We are a versatile service company providing professional towing, transportation, and cargo services across Selangor. Available 23/7, we are dedicated to efficient logistics and safe handling for all your needs.</p>
                     <ul class="about-features">
@@ -293,22 +329,29 @@
     </section>
 
     <footer>
-        <p>&copy; 2026 Multipurpose Towing Selangor. All Rights Reserved.</p>
+        <p id="footer-text">&copy; 2026 Multipurpose Towing Selangor. All Rights Reserved.</p>
     </footer>
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
         AOS.init({ once: true, duration: 800 });
 
+        // Logic to toggle mobile menu visibility
+        function toggleMobileMenu() {
+            document.getElementById('navLinks').classList.toggle('active');
+        }
+
         function toggleLangMenu() {
             document.getElementById('langMenu').classList.toggle('show');
         }
 
+        // Translation data with natural, easy-to-understand Malay
         const translations = {
             en: {
                 "nav-home": "Home", "nav-about": "About Us", "nav-cov": "Area Coverage", "nav-lang-text": "Language ", "btn-call": "Call Now!!",
                 "hero-title": "23/7 TOWING & LOGISTICS IN SELANGOR", "hero-sub": "Fast, courteous and inexpensive multipurpose transport solutions in Selangor.",
                 "h-call": "Call 014-3200345", "h-wa": "WhatsApp Now!",
+                "who-we-are": "WHO WE ARE",
                 "ab-t": "Your Multipurpose Transport Partner", 
                 "ab-d": "We are a versatile service company providing professional towing, transportation, and cargo services across Selangor. Available 23/7, we are dedicated to efficient logistics and safe handling for all your needs.",
                 "feat-1": "Towing & Recovery", "feat-2": "Cargo & Logistic", "feat-3": "23/7 Availability", "feat-4": "Safe Transport",
@@ -317,21 +360,46 @@
                 "w2-d": "Our dispatchers are strategically located throughout Selangor for the quickest arrival time.",
                 "w3-d": "Get premium multipurpose services at prices that won't break the bank. No hidden charges.",
                 "ser-title": "OUR SERVICES", "s1-t": "Towing & Recovery", "s2-t": "Transportation", "s3-t": "Cargo Services",
-                "cov-title": "AREA COVERAGE", "cov-sub": "Serving Hulu Selangor and surrounding regions"
+                "s1-d": "23/7 emergency towing and accident recovery services.",
+                "s2-d": "Fast and reliable vehicle & equipment transportation.",
+                "s3-d": "Professional cargo handling and logistics management.",
+                "cov-title": "AREA COVERAGE", "cov-sub": "Serving Hulu Selangor and surrounding regions",
+                "footer-text": "© 2026 Multipurpose Towing Selangor. All Rights Reserved."
             },
             ms: {
-                "nav-home": "Utama", "nav-about": "Tentang Kami", "nav-cov": "Liputan Kawasan", "nav-lang-text": "Bahasa ", "btn-call": "Hubungi Segera!!",
-                "hero-title": "PENGANGKUTAN & TUNDA 23/7 SELANGOR", "hero-sub": "Penyelesaian pengangkutan pelbagai guna yang pantas, sopan dan murah di Selangor.",
-                "h-call": "Hubungi 014-3200345", "h-wa": "WhatsApp Sekarang!",
-                "ab-t": "Rakan Pengangkutan Pelbagai Guna Anda", 
-                "ab-d": "Kami adalah syarikat perkhidmatan serba boleh yang menyediakan servis tunda, pengangkutan, dan kargo di seluruh Selangor. Tersedia 23/7, kami komited kepada logistik yang cekap dan pengendalian selamat untuk semua keperluan anda.",
-                "feat-1": "Tunda & Pemulihan", "feat-2": "Kargo & Logistik", "feat-3": "Sedia 23/7", "feat-4": "Kendalian Selamat",
-                "why-title": "KENAPA PILIH KAMI", "w1-t": "Sedia 23/7", "w2-t": "Respon Pantas", "w3-t": "Harga Berbaloi",
-                "w1-d": "Kami tidak pernah tutup. Hubungi kami bila-bila masa, setiap hari, termasuk cuti umum.",
-                "w2-d": "Dispatcher kami berada di lokasi strategik di seluruh Selangor untuk masa ketibaan terpantas.",
-                "w3-d": "Dapatkan servis pelbagai guna premium pada harga yang tidak membebankan. Tiada caj tersembunyi.",
-                "ser-title": "SERVIS KAMI", "s1-t": "Tunda & Pemulihan", "s2-t": "Pengangkutan", "s3-t": "Servis Kargo",
-                "cov-title": "KAWASAN LIPUTAN", "cov-sub": "Meliputi Hulu Selangor dan kawasan sekitarnya"
+                "nav-home": "Utama", 
+                "nav-about": "Tentang Kami", 
+                "nav-cov": "Kawasan Liputan", 
+                "nav-lang-text": "Pilih Bahasa ", 
+                "btn-call": "Call Segera!!",
+                "hero-title": "SERVIS TUNDA & LOGISTIK 23/7 SELANGOR", 
+                "hero-sub": "Servis tunda dan hantar barang yang cepat, mesra pelanggan, dan harga berpatutan di sekitar Selangor.",
+                "h-call": "Hubungi 014-3200345", 
+                "h-wa": "WhatsApp Kami!",
+                "who-we-are": "SIAPA KAMI",
+                "ab-t": "Pakar Tunda & Hantar Barang Anda", 
+                "ab-d": "Kami menyediakan servis tunda kereta, hantar barang (kargo), dan logistik di seluruh Selangor. Kami beroperasi 23/7—sentiasa bersedia bila-bila masa anda perlukan bantuan dengan jaminan barang selamat sampai.",
+                "feat-1": "Tunda Kereta", 
+                "feat-2": "Hantar Barang/Kargo", 
+                "feat-3": "Ready 23 Jam/7 Hari", 
+                "feat-4": "Dijamin Selamat",
+                "why-title": "KENAPA PILIH KAMI", 
+                "w1-t": "Buka Setiap Hari", 
+                "w2-t": "Respon Cepat", 
+                "w3-t": "Harga Murah & Jujur",
+                "w1-d": "Kami tak pernah tutup. Call saja bila-bila masa, termasuk hari cuti umum.",
+                "w2-d": "Team kami ada di merata tempat di Selangor supaya kami boleh sampai ke lokasi anda dengan cepat.",
+                "w3-d": "Servis kualiti tinggi pada harga mampu milik. Paling penting, tiada caj tersembunyi.",
+                "ser-title": "SERVIS KAMI", 
+                "s1-t": "Tunda & Emergency", 
+                "s2-t": "Pengangkutan Barang", 
+                "s3-t": "Servis Kargo",
+                "s1-d": "Servis tunda kecemasan 23/7 untuk kereta rosak atau kemalangan.",
+                "s2-d": "Hantar kenderaan atau barang berat dengan cepat dan selamat.",
+                "s3-d": "Pengurusan logistik dan kargo yang profesional untuk anda.",
+                "cov-title": "KAWASAN LIPUTAN", 
+                "cov-sub": "Kami cover area Hulu Selangor dan kawasan sekitarnya",
+                "footer-text": "© 2026 Multipurpose Towing Selangor. Hak Cipta Terpelihara."
             }
         };
 
@@ -347,12 +415,17 @@
                 }
             }
             toggleLangMenu();
+            // Close mobile menu after selection
+            document.getElementById('navLinks').classList.remove('active');
         }
 
+        // Close menus when clicking outside
         window.onclick = function(e) {
-            if (!e.target.matches('#nav-lang-text') && !e.target.matches('.fa-chevron-down')) {
-                const menu = document.getElementById('langMenu');
-                if (menu && menu.classList.contains('show')) menu.classList.remove('show');
+            if (!e.target.matches('#nav-lang-text') && !e.target.matches('.fa-chevron-down') && !e.target.matches('.fa-bars') && !e.target.closest('.menu-toggle')) {
+                const langMenu = document.getElementById('langMenu');
+                const navLinks = document.getElementById('navLinks');
+                if (langMenu && langMenu.classList.contains('show')) langMenu.classList.remove('show');
+                if (navLinks && navLinks.classList.contains('active')) navLinks.classList.remove('active');
             }
         }
     </script>
