@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multipurpose Towing & Transport Selangor | 23/7</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <style>
+        :root {
+            --sky: #56A3D3;
+            --main: #1876B0;
+            --navy: #213E60;
+            --white: #FFFFFF;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+        body { color: var(--navy); background: var(--white); overflow-x: hidden; scroll-behavior: smooth; }
+        .container { width: 90%; max-width: 1200px; margin: auto; }
+
+        /* Header & Navigation */
+        .main-header { background: var(--main); padding: 12px 0; position: sticky; top: 0; z-index: 1000; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        .nav-wrapper { display: flex; justify-content: space-between; align-items: center; }
+        .logo-area { color: white; display: flex; flex-direction: column; align-items: center; font-weight: 900; text-transform: uppercase; }
+        .nav-links { display: flex; list-style: none; gap: 20px; align-items: center; }
+        .nav-links a { color: white; text-decoration: none; font-weight: 700; transition: 0.3s; }
+        .nav-links a:hover { color: var(--navy); }
+        
+        .dropdown { position: relative; }
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            top: 40px;
+            right: 0;
+            background: white;
+            min-width: 160px;
+            border-radius: 8px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            list-style: none;
+            overflow: hidden;
+            z-index: 1001;
+        }
+        .dropdown-menu.show { display: block; }
+        .dropdown-menu a { color: var(--navy) !important; padding: 12px; display: block; font-size: 0.9rem; border-bottom: 1px solid #eee; }
+
+        .call-now-btn, .btn-dark { 
+            background: var(--navy); 
+            color: white; 
+            padding: 10px 18px; 
+            border-radius: 15px; 
+            text-decoration: none; 
+            font-weight: 800; 
+            display: inline-block; 
+            transition: 0.3s; 
+            border: 1px solid rgba(4, 195, 216, 0.1);
+        }
+
+        .btn-dark { padding: 14px 28px; margin: 10px; font-weight: bold; }
+
+        .call-now-btn:hover, .btn-dark:hover { 
+            background: var(--main); 
+            transform: translateY(-3px); 
+            color: white;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('tow1.0.jpg');
+            height: 75vh;
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            color: white;
+        }
+        .hero h1 { font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 900; margin-bottom: 15px; }
+
+        /* About Us Section */
+        .about-section { padding: 80px 0; background: #fff; }
+        .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+        .about-img-main { width: 100%; border-radius: 20px; box-shadow: 20px 20px 0px var(--sky); }
+        .about-content h2 { font-size: 2.5rem; margin-bottom: 20px; font-weight: 900; color: var(--navy); }
+        .about-features { list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 20px;}
+        .about-features li { display: flex; align-items: center; gap: 10px; font-weight: 700; }
+        .about-features li i { color: var(--main); }
+
+        /* Section Titles */
+        .section-title { font-size: 2.2rem; border-bottom: 4px solid var(--sky); display: inline-block; margin-bottom: 40px; font-weight: 900; text-transform: uppercase; }
+
+        /* Area Coverage Section */
+        #coverage { scroll-margin-top: 80px; }
+        .coverage-section { 
+            padding: 80px 0; 
+            background: linear-gradient(rgba(33, 62, 96, 0.92), rgba(33, 62, 96, 0.92)), url('https://images.unsplash.com/photo-1560179707-f14e90ef3623?q=80&w=1200');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: white;
+            text-align: center;
+        }
+        .coverage-section .section-title { color: white; border-bottom-color: var(--sky); }
+        .coverage-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); 
+            gap: 15px; 
+            margin-top: 30px;
+        }
+        .coverage-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 25px 15px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            transition: 0.3s ease;
+        }
+        .coverage-card:hover {
+            background: var(--main);
+            transform: translateY(-8px);
+            border-color: var(--sky);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+        .coverage-card i { font-size: 1.8rem; color: var(--sky); margin-bottom: 12px; display: block; }
+        .coverage-card h3 { font-size: 0.95rem; font-weight: 700; color: white; text-transform: uppercase; letter-spacing: 0.5px; }
+
+        /* Services Section */
+        .services-section { padding: 80px 0; background: var(--white); }
+        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 40px; }
+        .service-item { border-left: 4px solid var(--sky); padding: 15px 0 15px 25px; transition: 0.3s ease; }
+        .service-item:hover { background: #f8fbff; border-left-color: var(--navy); }
+        .service-item i { font-size: 2.5rem; color: var(--main); margin-bottom: 15px; }
+
+        /* Why Choose Us */
+        .why-section {
+            padding: 80px 0;
+            background: linear-gradient(135deg, var(--navy) 0%, var(--main) 100%);
+            color: white;
+            text-align: center;
+        }
+        .why-section .section-title { color: white; border-bottom-color: var(--sky); }
+        .why-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; margin-top: 50px; }
+        .why-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 40px 30px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: 0.4s;
+        }
+        .why-icon-circle { width: 70px; height: 70px; background: var(--sky); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; font-size: 1.8rem; color: var(--navy); }
+
+        footer { padding: 40px 0; text-align: center; background: #1a324d; color: white; }
+
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .about-grid { grid-template-columns: 1fr; text-align: center; }
+            .about-features { justify-content: center; }
+            .coverage-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="main-header">
+        <nav class="container nav-wrapper">
+            <div class="logo-area">
+                <i class="fas fa-truck-moving"></i>
+                <span>Multipurpose</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#home" id="nav-home">Home</a></li>
+                <li><a href="#about" id="nav-about">About Us</a></li>
+                <li><a href="#coverage" id="nav-cov">Area Coverage</a></li>
+                <li class="dropdown">
+                    <a href="javascript:void(0)" id="nav-lang-text" onclick="toggleLangMenu()">
+                        Language <i class="fas fa-chevron-down"></i>
+                    </a>
+                    <ul class="dropdown-menu" id="langMenu">
+                        <li><a href="javascript:void(0)" onclick="changeLanguage('en')">English</a></li>
+                        <li><a href="javascript:void(0)" onclick="changeLanguage('ms')">Bahasa Melayu</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <a href="tel:+60143200345" class="call-now-btn">
+                <i class="fas fa-phone-alt"></i> <span id="btn-call">Call Now!!</span>
+            </a>
+        </nav>
+    </header>
+
+    <section class="hero" id="home">
+        <div class="container" data-aos="fade-up">
+            <h1 id="hero-title">23/7 TOWING & LOGISTICS IN SELANGOR</h1>
+            <p id="hero-sub">Fast, courteous and inexpensive multipurpose transport solutions in Selangor.</p>
+            <div class="hero-btns">
+                <a href="tel:+60143200345" class="btn-dark"><i class="fas fa-phone-alt"></i> <span id="h-call">Call 014-3200345</span></a>
+                <a href="https://wa.me/60143200345" target="_blank" class="btn-dark"><i class="fab fa-whatsapp"></i> <span id="h-wa">WhatsApp Now!</span></a>
+            </div>
+        </div>
+    </section>
+
+    <section class="about-section" id="about">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-image-wrapper" data-aos="fade-right">
+                    <img src="tow2.0.JPG" alt="Towing Truck" class="about-img-main">
+                </div>
+                <div class="about-content" data-aos="fade-left">
+                    <span style="color: var(--main); font-weight: 900; letter-spacing: 2px;">WHO WE ARE</span>
+                    <h2 id="ab-t">Your Multipurpose Transport Partner</h2>
+                    <p id="ab-d">We are a versatile service company providing professional towing, transportation, and cargo services across Selangor. Available 23/7, we are dedicated to efficient logistics and safe handling for all your needs.</p>
+                    <ul class="about-features">
+                        <li><i class="fas fa-truck-pickup"></i> <span id="feat-1">Towing & Recovery</span></li>
+                        <li><i class="fas fa-box-open"></i> <span id="feat-2">Cargo & Logistic</span></li>
+                        <li><i class="fas fa-clock"></i> <span id="feat-3">23/7 Availability</span></li>
+                        <li><i class="fas fa-shield-alt"></i> <span id="feat-4">Safe Transport</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="coverage-section" id="coverage">
+        <div class="container" data-aos="fade-up">
+            <h2 class="section-title" id="cov-title">AREA COVERAGE</h2>
+            <p id="cov-sub" style="color: var(--sky); margin-top: -30px; margin-bottom: 40px; font-weight: 700;">Serving Hulu Selangor and surrounding regions</p>
+            
+            <div class="coverage-grid">
+                <div class="coverage-card"><i class="fas fa-location-dot"></i><h3>Hulu Selangor</h3></div>
+                <div class="coverage-card"><i class="fas fa-location-dot"></i><h3>Rawang</h3></div>
+                <div class="coverage-card"><i class="fas fa-location-dot"></i><h3>Serendah</h3></div>
+                <div class="coverage-card"><i class="fas fa-location-dot"></i><h3>Kuala Kubu Bahru</h3></div>
+                <div class="coverage-card"><i class="fas fa-location-dot"></i><h3>Batang Kali</h3></div>
+                <div class="coverage-card"><i class="fas fa-location-dot"></i><h3>Rasa</h3></div>
+                <div class="coverage-card"><i class="fas fa-location-dot"></i><h3>Bukit Beruntung</h3></div>
+                <div class="coverage-card"><i class="fas fa-location-dot"></i><h3>Bukit Sentosa</h3></div>
+                <div class="coverage-card"><i class="fas fa-location-dot"></i><h3>Bandar Sg Buaya</h3></div>
+                <div class="coverage-card"><i class="fas fa-location-dot"></i><h3>Country Homes</h3></div>
+                <div class="coverage-card"><i class="fas fa-location-dot"></i><h3>Tasik Putri</h3></div>
+                <div class="coverage-card"><i class="fas fa-location-dot"></i><h3>Templer Park</h3></div>
+                <div class="coverage-card"><i class="fas fa-location-dot"></i><h3>Sg Choh</h3></div>
+                <div class="coverage-card"><i class="fas fa-location-dot"></i><h3>Sg Tinggi</h3></div>
+                <div class="coverage-card"><i class="fas fa-location-dot"></i><h3>Suharto</h3></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="services-section">
+        <div class="container">
+            <h2 class="section-title" id="ser-title">OUR SERVICES</h2>
+            <div class="services-grid">
+                <div class="service-item" data-aos="fade-up">
+                    <i class="fas fa-truck-monster"></i>
+                    <h3 id="s1-t">Towing & Recovery</h3>
+                    <p id="s1-d">23/7 emergency towing and accident recovery services.</p>
+                </div>
+                <div class="service-item" data-aos="fade-up" data-aos-delay="100">
+                    <i class="fas fa-shipping-fast"></i>
+                    <h3 id="s2-t">Transportation</h3>
+                    <p id="s2-d">Fast and reliable vehicle & equipment transportation.</p>
+                </div>
+                <div class="service-item" data-aos="fade-up" data-aos-delay="200">
+                    <i class="fas fa-boxes-packing"></i>
+                    <h3 id="s3-t">Cargo Services</h3>
+                    <p id="s3-d">Professional cargo handling and logistics management.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="why-section">
+        <div class="container">
+            <h2 class="section-title" id="why-title">WHY CHOOSE US</h2>
+            <div class="why-grid">
+                <div class="why-card" data-aos="zoom-in">
+                    <div class="why-icon-circle"><i class="fas fa-clock"></i></div>
+                    <h3 id="w1-t">23/7 Availability</h3>
+                    <p id="w1-d">We never close. Call us anytime, any day of the week, including public holidays.</p>
+                </div>
+                <div class="why-card" data-aos="zoom-in" data-aos-delay="100">
+                    <div class="why-icon-circle"><i class="fas fa-bolt"></i></div>
+                    <h3 id="w2-t">Fast Response</h3>
+                    <p id="w2-d">Our dispatchers are strategically located throughout Selangor for the quickest arrival time.</p>
+                </div>
+                <div class="why-card" data-aos="zoom-in" data-aos-delay="200">
+                    <div class="why-icon-circle"><i class="fas fa-tags"></i></div>
+                    <h3 id="w3-t">Affordable Rates</h3>
+                    <p id="w3-d">Get premium multipurpose services at prices that won't break the bank. No hidden charges.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Multipurpose Towing Selangor. All Rights Reserved.</p>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({ once: true, duration: 800 });
+
+        function toggleLangMenu() {
+            document.getElementById('langMenu').classList.toggle('show');
+        }
+
+        const translations = {
+            en: {
+                "nav-home": "Home", "nav-about": "About Us", "nav-cov": "Area Coverage", "nav-lang-text": "Language ", "btn-call": "Call Now!!",
+                "hero-title": "23/7 TOWING & LOGISTICS IN SELANGOR", "hero-sub": "Fast, courteous and inexpensive multipurpose transport solutions in Selangor.",
+                "h-call": "Call 014-3200345", "h-wa": "WhatsApp Now!",
+                "ab-t": "Your Multipurpose Transport Partner", 
+                "ab-d": "We are a versatile service company providing professional towing, transportation, and cargo services across Selangor. Available 23/7, we are dedicated to efficient logistics and safe handling for all your needs.",
+                "feat-1": "Towing & Recovery", "feat-2": "Cargo & Logistic", "feat-3": "23/7 Availability", "feat-4": "Safe Transport",
+                "why-title": "WHY CHOOSE US", "w1-t": "23/7 Availability", "w2-t": "Fast Response", "w3-t": "Affordable Rates",
+                "w1-d": "We never close. Call us anytime, any day of the week, including public holidays.",
+                "w2-d": "Our dispatchers are strategically located throughout Selangor for the quickest arrival time.",
+                "w3-d": "Get premium multipurpose services at prices that won't break the bank. No hidden charges.",
+                "ser-title": "OUR SERVICES", "s1-t": "Towing & Recovery", "s2-t": "Transportation", "s3-t": "Cargo Services",
+                "cov-title": "AREA COVERAGE", "cov-sub": "Serving Hulu Selangor and surrounding regions"
+            },
+            ms: {
+                "nav-home": "Utama", "nav-about": "Tentang Kami", "nav-cov": "Liputan Kawasan", "nav-lang-text": "Bahasa ", "btn-call": "Hubungi Segera!!",
+                "hero-title": "PENGANGKUTAN & TUNDA 23/7 SELANGOR", "hero-sub": "Penyelesaian pengangkutan pelbagai guna yang pantas, sopan dan murah di Selangor.",
+                "h-call": "Hubungi 014-3200345", "h-wa": "WhatsApp Sekarang!",
+                "ab-t": "Rakan Pengangkutan Pelbagai Guna Anda", 
+                "ab-d": "Kami adalah syarikat perkhidmatan serba boleh yang menyediakan servis tunda, pengangkutan, dan kargo di seluruh Selangor. Tersedia 23/7, kami komited kepada logistik yang cekap dan pengendalian selamat untuk semua keperluan anda.",
+                "feat-1": "Tunda & Pemulihan", "feat-2": "Kargo & Logistik", "feat-3": "Sedia 23/7", "feat-4": "Kendalian Selamat",
+                "why-title": "KENAPA PILIH KAMI", "w1-t": "Sedia 23/7", "w2-t": "Respon Pantas", "w3-t": "Harga Berbaloi",
+                "w1-d": "Kami tidak pernah tutup. Hubungi kami bila-bila masa, setiap hari, termasuk cuti umum.",
+                "w2-d": "Dispatcher kami berada di lokasi strategik di seluruh Selangor untuk masa ketibaan terpantas.",
+                "w3-d": "Dapatkan servis pelbagai guna premium pada harga yang tidak membebankan. Tiada caj tersembunyi.",
+                "ser-title": "SERVIS KAMI", "s1-t": "Tunda & Pemulihan", "s2-t": "Pengangkutan", "s3-t": "Servis Kargo",
+                "cov-title": "KAWASAN LIPUTAN", "cov-sub": "Meliputi Hulu Selangor dan kawasan sekitarnya"
+            }
+        };
+
+        function changeLanguage(lang) {
+            for (let id in translations[lang]) {
+                const el = document.getElementById(id);
+                if (el) {
+                    if (id === "nav-lang-text") {
+                        el.innerHTML = translations[lang][id] + ' <i class="fas fa-chevron-down"></i>';
+                    } else {
+                        el.innerText = translations[lang][id];
+                    }
+                }
+            }
+            toggleLangMenu();
+        }
+
+        window.onclick = function(e) {
+            if (!e.target.matches('#nav-lang-text') && !e.target.matches('.fa-chevron-down')) {
+                const menu = document.getElementById('langMenu');
+                if (menu && menu.classList.contains('show')) menu.classList.remove('show');
+            }
+        }
+    </script>
+</body>
+</html>
